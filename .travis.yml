@@ -10,15 +10,15 @@ matrix:
     os:
     - linux
     install:
-    - go get github.com/stretchr/testify/assert
+    - # go get github.com/stretchr/testify/assert
     before_install:
     - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
       > ./cc-test-reporter
     - chmod +x ./cc-test-reporter
     - "./cc-test-reporter before-build"
     script:
-    - go test -race -v -coverprofile=c0.out go test github.com/mchirico/date/dateparse
-
+    - go test -race -v -coverprofile=c0.out github.com/mchirico/date/dateparse
+    
     after_success:
     - cat c0.out > c.out
     - bash <(curl -s https://codecov.io/bash)
