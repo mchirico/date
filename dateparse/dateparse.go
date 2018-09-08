@@ -10,7 +10,7 @@ import (
 type DateTimeParse string
 
 // getTime --
-func (s DateTimeParse) getTime() (time.Time, error) {
+func (s DateTimeParse) GetTime() (time.Time, error) {
 	layout := []string{
 		"January 2, 2006, 3:04 pm",
 		"January 2, 2006, 3:04pm",
@@ -52,9 +52,9 @@ func (s DateTimeParse) getTime() (time.Time, error) {
 }
 
 // getTimeLoc --
-func (s DateTimeParse) getTimeLoc() (time.Time, error) {
+func (s DateTimeParse) GetTimeLoc() (time.Time, error) {
 
-	tt, err := DateTimeParse(s).getTime()
+	tt, err := DateTimeParse(s).GetTime()
 	if err != nil {
 		return tt, err
 	}
@@ -64,9 +64,9 @@ func (s DateTimeParse) getTimeLoc() (time.Time, error) {
 
 }
 
-func (s DateTimeParse) getTimeLocSquish() (string, error) {
+func (s DateTimeParse) GetTimeLocSquish() (string, error) {
 
-	tt, err := DateTimeParse(s).getTime()
+	tt, err := DateTimeParse(s).GetTime()
 	if err != nil {
 		return "", err
 	}
@@ -76,9 +76,9 @@ func (s DateTimeParse) getTimeLocSquish() (string, error) {
 
 }
 
-func (s DateTimeParse) getTimeLocHRminS() (string, error) {
+func (s DateTimeParse) GetTimeLocHRminS() (string, error) {
 
-	tt, err := DateTimeParse(s).getTime()
+	tt, err := DateTimeParse(s).GetTime()
 	if err != nil {
 		return "", err
 	}
