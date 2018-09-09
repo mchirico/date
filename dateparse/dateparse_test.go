@@ -7,8 +7,8 @@ import (
 )
 
 func TestLoctoUTC(t *testing.T) {
-	s := "Sep  8 13:24:18 "
-	tt, err := DateTimeParse(s).LoctoUTC()
+	s := "Sep  8  13:24:18 "
+	tt, err := DateTimeParse(s).NewYork()
 	if err != nil {
 		t.Fatalf("Time gave error")
 	}
@@ -20,7 +20,9 @@ func TestLoctoUTC(t *testing.T) {
 
 	t2, err := DateTimeParse("2018-09-08 17:24:18 +0000 UTC").GetTime()
 
-	if tt != t2 {
+	loc, err := time.LoadLocation("America/New_York")
+
+	if tt.In(loc) != t2.In(loc) {
 		t.Fatalf("Times should be equal: %v,%v", tt, t2)
 	}
 

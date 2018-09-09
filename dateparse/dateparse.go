@@ -27,6 +27,8 @@ func (s DateTimeParse) GetTime() (time.Time, error) {
 		"Jan 2, 06, 3:04 pm",
 
 		"Jan 2  15:04:05",
+		"2 Jan 15:04:05",
+		"15:04:05 2 Jan",
 
 		"2006-01-02 3:04 pm",
 		"2006-01-02 3:04pm",
@@ -54,9 +56,15 @@ func (s DateTimeParse) GetTime() (time.Time, error) {
 
 }
 
-// LoctoUTC - Input localtime New_York and convert to UTC
-//           Add year, if missing
-func (s DateTimeParse) LoctoUTC() (time.Time, error) {
+/*  NewYork() - Input localtime New_York and convert to UTC
+          Add year, if missing
+
+    Input: "Sep  8  13:24:18 "
+    Expected output: "2018-09-08 13:24:18 -0400 EDT"
+
+
+ */
+func (s DateTimeParse) NewYork() (time.Time, error) {
 
 	tt, err := DateTimeParse(s).GetTime()
 	if err != nil {
@@ -72,7 +80,7 @@ func (s DateTimeParse) LoctoUTC() (time.Time, error) {
 	_, offset := tt.In(loc).Zone()
 	tt = tt.Add(time.Duration(-offset) * time.Second)
 
-	return tt, err
+	return tt.In(loc), err
 }
 
 // GetTimeLoc --
