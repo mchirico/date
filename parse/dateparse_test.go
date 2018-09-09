@@ -1,4 +1,4 @@
-package dateparse
+package parse
 
 import (
 	"fmt"
@@ -61,3 +61,5 @@ func TestDateTimeParse(t *testing.T) {
 
 	fmt.Println(tt.Unix())
 }
+
+

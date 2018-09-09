@@ -7,7 +7,7 @@ Go Dateparse
 ## Install
 
 ```bash
-go get -u github.com/mchirico/date/dateparse
+go get -u github.com/mchirico/date/parse
 
 ```
 
@@ -20,7 +20,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mchirico/date/dateparse"
+	"github.com/mchirico/date/parse"
 )
 
 func main() {

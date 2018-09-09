@@ -1,4 +1,4 @@
-package dateparse
+package parse
 
 import (
 	"fmt"
@@ -96,7 +96,7 @@ func (s DateTimeParse) GetTimeLoc() (time.Time, error) {
 
 }
 
-// GetTimeLocSquish --
+// GetTimeLocSquish -- Force min to be int in 10 min interval
 func (s DateTimeParse) GetTimeLocSquish() (string, error) {
 
 	tt, err := DateTimeParse(s).GetTime()
