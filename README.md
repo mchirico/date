@@ -26,7 +26,7 @@ import (
 func main() {
 
 	s := "Sep  8  13:24:18 "
-	tt, err := dateparse.DateTimeParse(s).NewYork()
+	tt, err := parse.DateTimeParse(s).NewYork()
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
 		return
