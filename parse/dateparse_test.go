@@ -18,7 +18,9 @@ func TestLoctoUTC(t *testing.T) {
 			tt, time.Now().Year())
 	}
 
-	t2, err := DateTimeParse("2018-09-08 17:24:18 +0000 UTC").GetTime()
+	year := fmt.Sprintf("%d-09-08 17:24:18 +0000 UTC",tt.Year())
+
+	t2, err := DateTimeParse(year).GetTime()
 
 	loc, err := time.LoadLocation("America/New_York")
 
