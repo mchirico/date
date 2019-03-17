@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/mchirico/date.svg?branch=develop)](https://travis-ci.org/mchirico/date)
+[![codecov](https://codecov.io/gh/mchirico/date/branch/develop/graph/badge.svg)](https://codecov.io/gh/mchirico/date)
 
 # date
 Go Dateparse

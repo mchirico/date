@@ -10,15 +10,16 @@ matrix:
     os:
     - linux
     install:
-    - # go get github.com/stretchr/testify/assert
+    - go get github.com/axw/gocov/gocov
+    - go install github.com/axw/gocov/gocov
     before_install:
     - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
       > ./cc-test-reporter
     - chmod +x ./cc-test-reporter
     - "./cc-test-reporter before-build"
     script:
-    - go test -race -v -coverprofile=c0.out github.com/mchirico/date/parse
-    
+      - go test -race -v -coverprofile=c.out ./... && echo -e "\n\n\n ✅ SUCCESS \n\n"
+      - gocov test ./... > cc.out
     after_success:
     - cat c0.out > c.out
     - bash <(curl -s https://codecov.io/bash)
