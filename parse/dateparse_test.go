@@ -76,7 +76,6 @@ func TestDateTimeParse_DaysFrom(t *testing.T) {
 	if days != 3 {
 		t.Fatalf("Expected 3, Got: %d\n", days)
 	}
-
 }
 
 func TestDateTimeParse_DaysBetween(t *testing.T) {
@@ -90,6 +89,19 @@ func TestDateTimeParse_DaysBetween(t *testing.T) {
 
 	if days != 3 {
 		t.Fatalf("Expected 3, Got: %d\n", days)
+	}
+
+}
+
+func TestDateTimeParse_Squish_format(t *testing.T) {
+	r, err := DateTimeParse(" 1 2 2006 13:29").GetTimeLocSquish()
+
+	if err != nil {
+		t.FailNow()
+	}
+
+	if r != "13:20" {
+		t.Fatalf("Expected: 13:20, Got: %s\n", r)
 	}
 
 }
