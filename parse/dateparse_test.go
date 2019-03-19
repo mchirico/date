@@ -18,7 +18,7 @@ func TestLoctoUTC(t *testing.T) {
 			tt, time.Now().Year())
 	}
 
-	year := fmt.Sprintf("%d-09-08 17:24:18 +0000 UTC",tt.Year())
+	year := fmt.Sprintf("%d-09-08 17:24:18 +0000 UTC", tt.Year())
 
 	t2, err := DateTimeParse(year).GetTime()
 
@@ -64,4 +64,32 @@ func TestDateTimeParse(t *testing.T) {
 	fmt.Println(tt.Unix())
 }
 
+func TestDateTimeParse_DaysFrom(t *testing.T) {
+	s := " April 2, 2018, 6:45 pm"
+	s2 := " April 5, 2018, 6:45 pm"
 
+	days, err := DateTimeParse(s).DaysFrom(s2)
+	if err != nil {
+		t.Fatalf("Time gave error")
+	}
+
+	if days != 3 {
+		t.Fatalf("Expected 3, Got: %d\n", days)
+	}
+
+}
+
+func TestDateTimeParse_DaysBetween(t *testing.T) {
+	s2 := " April 2, 2018, 6:45 pm"
+	s := " April 5, 2018, 6:45 pm"
+
+	days, err := DateTimeParse(s).DaysBetween(s2)
+	if err != nil {
+		t.Fatalf("Time gave error")
+	}
+
+	if days != 3 {
+		t.Fatalf("Expected 3, Got: %d\n", days)
+	}
+
+}
