@@ -42,12 +42,11 @@ func (s DateTimeParse) GetTime() (time.Time, error) {
 		"2006/01/02 3:04PM",
 		"2006/01/02 15:04",
 
-
 		"01/02/2006 3:04 pm",
 		"01/02/2006 3:04pm",
 		"01/02/2006 3:04 PM",
 		"01/02/2006 3:04PM",
-		"01/02/2006 15:04",				
+		"01/02/2006 15:04",
 
 		"01/02/2006",
 		"1/2/2006",
@@ -60,7 +59,6 @@ func (s DateTimeParse) GetTime() (time.Time, error) {
 
 		"01.02.2006",
 		"1.2.2006",
-
 
 		"2006-01-02 15:04:05 +0000 UTC",
 		"2006-01-02T15:04:05+07:00",
@@ -89,7 +87,7 @@ func (s DateTimeParse) GetTime() (time.Time, error) {
     Expected output: "2018-09-08 13:24:18 -0400 EDT"
 
 
- */
+*/
 func (s DateTimeParse) NewYork() (time.Time, error) {
 
 	tt, err := DateTimeParse(s).GetTime()
@@ -144,5 +142,45 @@ func (s DateTimeParse) GetTimeLocHRminS() (string, error) {
 	}
 	ret := fmt.Sprintf("%02d:%02d", tt.Hour(), tt.Minute())
 	return ret, err
+
+}
+
+func (s DateTimeParse) DaysFrom(day2 string) (int, error) {
+
+	tt, err := DateTimeParse(s).GetTime()
+	if err != nil {
+		return 0, err
+	}
+
+	t2, err := DateTimeParse(day2).GetTime()
+	if err != nil {
+		return 0, err
+	}
+
+	days := int(t2.Sub(tt).Hours() / 24)
+
+	return days, err
+
+}
+
+// DaysBetween always positive
+func (s DateTimeParse) DaysBetween(day2 string) (int, error) {
+
+	tt, err := DateTimeParse(s).GetTime()
+	if err != nil {
+		return 0, err
+	}
+
+	t2, err := DateTimeParse(day2).GetTime()
+	if err != nil {
+		return 0, err
+	}
+
+	days := int(t2.Sub(tt).Hours() / 24)
+	if days < 0 {
+		days = -days
+	}
+
+	return days, err
 
 }
