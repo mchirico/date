@@ -2,15 +2,46 @@ package parse
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
 )
+
+// Private function to catch Epoch integer in string
+func ifEpoch(s string) (time.Time, error) {
+	i, err := strconv.ParseInt(s, 10, 64)
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	if len(s) == 13 {
+
+		seconds, err := strconv.ParseInt(s[0:10], 10, 64)
+		if err != nil {
+			return time.Time{}, err
+		}
+
+		nsec, err := strconv.ParseInt(s[10:], 10, 64)
+		t := time.Unix(seconds, nsec)
+		return t, err
+	}
+
+	t := time.Unix(i, 0)
+	return t, err
+
+}
 
 // DateTimeParse -- variety of expected dates
 type DateTimeParse string
 
 // getTime --
 func (s DateTimeParse) GetTime() (time.Time, error) {
+
+	t, err := ifEpoch(string(s))
+	if err == nil {
+		return t, err
+	}
+
 	layout := []string{
 		"January 2, 2006, 3:04 pm",
 		"January 2, 2006, 3:04pm",
@@ -78,7 +109,6 @@ func (s DateTimeParse) GetTime() (time.Time, error) {
 		"15:04 1/2/2006",
 		"15:04 1_2_2006",
 		"15:04 1 2 2006",
-
 
 		"2006-01-02 15:04:05 +0000 UTC",
 		"2006-01-02T15:04:05+07:00",

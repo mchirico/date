@@ -93,15 +93,46 @@ func TestDateTimeParse_DaysBetween(t *testing.T) {
 
 }
 
-func TestDateTimeParse_Squish_format(t *testing.T) {
-	r, err := DateTimeParse(" 1 2 2006 13:29").GetTimeLocSquish()
+func TestDateTimeParse_Long(t *testing.T) {
+	r, err := DateTimeParse("Thu Mar 21 18:54:16 UTC 2019").GetTimeLocSquish()
 
 	if err != nil {
 		t.FailNow()
 	}
 
-	if r != "13:20" {
-		t.Fatalf("Expected: 13:20, Got: %s\n", r)
+	if r != "18:50" {
+		t.Fatalf("Expected: 18:50, Got: %s\n", r)
 	}
+
+}
+
+func Test_ifEpoch(t *testing.T) {
+	s := "1287621011948"
+
+	tt, err := ifEpoch(s)
+	if err != nil {
+		t.Fatalf("Can't convert string")
+	}
+
+	if 1287621011 != tt.Unix() {
+		t.Fatalf("Can't convert string")
+	}
+
+}
+
+func Test_ifEpoch_Error(t *testing.T) {
+	s := "1287jan1011948"
+
+	_, err := ifEpoch(s)
+	if err == nil {
+		t.Fatalf("Invalid timestamp")
+	}
+
+}
+
+func TestQuick(t *testing.T) {
+	s := "Thu Mar 21 19:07:52 UTC 2019"
+	tt, err := DateTimeParse(s).GetTimeLocSquish()
+	fmt.Printf("_>%s<_ %v %v\n", s, tt, err)
 
 }
