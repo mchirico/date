@@ -117,6 +117,12 @@ func TestDateTimeParse_NewYork(t *testing.T) {
 	if r.String() != expected {
 		t.Fatalf("Expected: %s, Got: %s", expected, r.String())
 	}
+
+	r, err = DateTimeParse("aThu Mar 21 18:54:16 UTC 2019").NewYork()
+	if err == nil {
+		t.FailNow()
+	}
+
 }
 
 func TestDateTimeParse_GetTimeLocHRminS(t *testing.T) {
@@ -134,6 +140,7 @@ func TestDateTimeParse_GetTimeLocHRminS(t *testing.T) {
 			t.Fatalf("Expected: 20:30, got: %v\n", r)
 		}
 	}
+
 }
 
 func Test_ifEpoch(t *testing.T) {
