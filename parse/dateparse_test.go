@@ -106,6 +106,36 @@ func TestDateTimeParse_Long(t *testing.T) {
 
 }
 
+func TestDateTimeParse_NewYork(t *testing.T) {
+	r, err := DateTimeParse("Thu Mar 21 18:54:16 UTC 2019").NewYork()
+
+	if err != nil {
+		t.FailNow()
+	}
+
+	expected := "2019-03-21 18:54:16 -0400 EDT"
+	if r.String() != expected {
+		t.Fatalf("Expected: %s, Got: %s", expected, r.String())
+	}
+}
+
+func TestDateTimeParse_GetTimeLocHRminS(t *testing.T) {
+	s := "1287621011948"
+	r, err := DateTimeParse(s).GetTimeLocHRminS()
+
+	t.Logf("r: %v\n", r)
+	if err != nil {
+		t.FailNow()
+	}
+
+	if r != "20:30" {
+		// Testing on travis, which is UTC
+		if r != "00:30" {
+			t.Fatalf("Expected: 20:30, got: %v\n", r)
+		}
+	}
+}
+
 func Test_ifEpoch(t *testing.T) {
 	s := "1287621011948"
 
@@ -117,6 +147,9 @@ func Test_ifEpoch(t *testing.T) {
 	if 1287621011 != tt.Unix() {
 		t.Fatalf("Can't convert string")
 	}
+	if tt.Nanosecond() != 948000000 {
+		t.Fatalf("Expected: %d\n", 948000000)
+	}
 
 }
 
@@ -126,6 +159,23 @@ func Test_ifEpoch_Error(t *testing.T) {
 	_, err := ifEpoch(s)
 	if err == nil {
 		t.Fatalf("Invalid timestamp")
+	}
+
+}
+
+func Test_EpochFull(t *testing.T) {
+	s := "1287621011948"
+	r, err := DateTimeParse(s).NewYork()
+	if err != nil {
+		t.FailNow()
+	}
+
+	if r.Nanosecond() != 948000000 {
+		t.FailNow()
+	}
+
+	if r.String() != "2010-10-21 00:30:11.948 -0400 EDT" {
+		t.FailNow()
 	}
 
 }
