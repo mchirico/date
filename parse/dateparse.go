@@ -14,7 +14,7 @@ func ifEpoch(s string) (time.Time, error) {
 		return time.Time{}, err
 	}
 
-	if len(s) >= 10 {
+	if len(s) > 10 {
 
 		seconds, err := strconv.ParseInt(s[0:10], 10, 64)
 		if err != nil {
