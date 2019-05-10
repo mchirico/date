@@ -38,3 +38,30 @@ func main() {
 }
 
 ```
+
+Here's another example:
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/mchirico/date/parse"
+)
+
+func main() {
+
+	s := "1554934858234"
+	tt, err := parse.DateTimeParse(s).NewYork()
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+		return
+	}
+	fmt.Printf("tt: %v\n", tt)
+	// tt: 2019-04-10 22:20:58.234 -0400 EDT
+
+}
+
+
+```
+
