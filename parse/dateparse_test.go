@@ -151,6 +151,17 @@ func Test_ifEpoch(t *testing.T) {
 		t.Fatalf("Expected: %d\n", 948000000)
 	}
 
+	s = "1287621011"
+
+	tt, err = ifEpoch(s)
+	if err != nil {
+		t.Fatalf("Can't convert string")
+	}
+
+	if tt.Unix() != 1287621011 {
+		t.Fatalf("tt.Unix() failed.")
+	}
+
 }
 
 func Test_ifEpoch_Error(t *testing.T) {
