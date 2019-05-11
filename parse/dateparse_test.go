@@ -56,7 +56,7 @@ func TestErrorChecking(t *testing.T) {
 	if r != "" {
 		t.Fatalf("Result should be empty string")
 	}
-	
+
 	good := " April 2, 2018, 6:45 pm"
 	_, err = DateTimeParse(good).DaysBetween(s)
 	if err == nil {
@@ -67,7 +67,6 @@ func TestErrorChecking(t *testing.T) {
 	if err == nil {
 		t.Fatalf("Should be error... two ll's in Aprill")
 	}
-
 
 	_, err = DateTimeParse(good).DaysFrom(s)
 	if err == nil {
@@ -251,5 +250,28 @@ func TestQuick(t *testing.T) {
 	s := "Thu Mar 21 19:07:52 UTC 2019"
 	tt, err := DateTimeParse(s).GetTimeLocSquish()
 	fmt.Printf("_>%s<_ %v %v\n", s, tt, err)
+
+}
+
+func TestTimeIn(t *testing.T) {
+
+	s := "Thu Mar 21 19:07:52 UTC 2019"
+	tt, err := DateTimeParse(s).TimeIn("America/New_York")
+	if err != nil {
+		t.Fatalf("Should not return error: %v\n", err)
+	}
+	if tt.String() != "2019-03-21 15:07:52 -0400 EDT" {
+		t.FailNow()
+	}
+
+	tt, err = DateTimeParse(s).TimeIn("Invalid America/New_York")
+	if err == nil {
+		t.FailNow()
+	}
+
+	tt, err = DateTimeParse("junk").TimeIn("America/New_York")
+	if err == nil {
+		t.FailNow()
+	}
 
 }
