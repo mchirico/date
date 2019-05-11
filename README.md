@@ -65,3 +65,53 @@ func main() {
 
 ```
 
+Works with timezones 
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/mchirico/date/parse"
+)
+
+func main() {
+
+	s := "1554934858234"
+	tt, err := parse.DateTimeParse(s).TimeIn("America/New_York")
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+		return
+	}
+	fmt.Printf("tt: %v\n", tt)
+	// tt: 2019-04-10 18:20:58.234 -0400 EDT
+
+	tt, _ = parse.DateTimeParse(s).TimeIn("America/Chicago")
+	fmt.Printf("tt: %v\n", tt)
+	// tt: 2019-04-10 17:20:58.234 -0500 CDT
+
+	tt, _ = parse.DateTimeParse(s).TimeIn("America/Detroit")
+	fmt.Printf("tt: %v\n", tt)
+	// tt: 2019-04-10 18:20:58.234 -0400 EDT
+
+	tt, _ = parse.DateTimeParse(s).TimeIn("America/Denver")
+	fmt.Printf("tt: %v\n", tt)
+	// tt: 2019-04-10 16:20:58.234 -0600 MDT
+
+	tt, _ = parse.DateTimeParse(s).TimeIn("America/Los_Angeles")
+	fmt.Printf("tt: %v\n", tt)
+	// tt: 2019-04-10 15:20:58.234 -0700 PDT
+
+	tt, _ = parse.DateTimeParse(s).TimeIn("UTC")
+	fmt.Printf("tt: %v\n", tt)
+	// tt: 2019-04-10 22:20:58.234 +0000 UTC
+
+	tt, _ = parse.DateTimeParse(s).TimeIn("Asia/Shanghai")
+	fmt.Printf("tt: %v\n", tt)
+	// tt: 2019-04-11 06:20:58.234 +0800 CST
+
+}
+
+
+```
+

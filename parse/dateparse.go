@@ -168,6 +168,23 @@ func (s DateTimeParse) GetTimeLoc() (time.Time, error) {
 
 }
 
+// TimeIn gives time in zone
+func (s DateTimeParse) TimeIn(zone string) (time.Time, error) {
+	tt, err := DateTimeParse(s).GetTime()
+	if err != nil {
+		return tt, err
+	}
+
+	loc, err := time.LoadLocation(zone)
+	if err != nil {
+		return tt, err
+	}
+
+	zone_time := tt.In(loc)
+	return zone_time, err
+
+}
+
 // GetTimeLocSquish -- Force min to be int in 10 min interval
 func (s DateTimeParse) GetTimeLocSquish() (string, error) {
 
