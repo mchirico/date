@@ -161,6 +161,7 @@ func (s DateTimeParse) GetTimeLoc() (time.Time, error) {
 	if err != nil {
 		return tt, err
 	}
+
 	loc, err := time.LoadLocation("America/New_York")
 
 	return tt.In(loc), err

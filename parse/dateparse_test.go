@@ -32,6 +32,55 @@ func TestLoctoUTC(t *testing.T) {
 
 }
 
+func TestErrorChecking(t *testing.T) {
+	s := " Aprill 2, 2018, 6:45 pm"
+	_, err := DateTimeParse(s).GetTimeLoc()
+	if err == nil {
+		t.Fatalf("Should be error... two ll's in Aprill")
+	}
+
+	r, err := DateTimeParse(s).GetTimeLocSquish()
+	if err == nil {
+		t.Fatalf("Should be error... two ll's in Aprill")
+	}
+
+	if r != "" {
+		t.Fatalf("Result should be empty string")
+	}
+
+	r, err = DateTimeParse(s).GetTimeLocHRminS()
+
+	if err == nil {
+		t.Fatalf("Should be error... two ll's in Aprill")
+	}
+	if r != "" {
+		t.Fatalf("Result should be empty string")
+	}
+	
+	good := " April 2, 2018, 6:45 pm"
+	_, err = DateTimeParse(good).DaysBetween(s)
+	if err == nil {
+		t.Fatalf("Should be error... two ll's in Aprill")
+	}
+
+	_, err = DateTimeParse(s).DaysBetween(good)
+	if err == nil {
+		t.Fatalf("Should be error... two ll's in Aprill")
+	}
+
+
+	_, err = DateTimeParse(good).DaysFrom(s)
+	if err == nil {
+		t.Fatalf("Should be error... two ll's in Aprill")
+	}
+
+	_, err = DateTimeParse(s).DaysFrom(good)
+	if err == nil {
+		t.Fatalf("Should be error... two ll's in Aprill")
+	}
+
+}
+
 func TestDateTimeParse(t *testing.T) {
 	s := " April 2, 2018, 6:45 pm"
 	tt, err := DateTimeParse(s).GetTimeLoc()
