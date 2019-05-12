@@ -115,3 +115,29 @@ func main() {
 
 ```
 
+Example of rounding down.
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/mchirico/date/parse"
+	"time"
+)
+
+func main() {
+
+	s := "Thu Mar 21 19:07:52 UTC 2019"
+	tt, err := parse.DateTimeParse(s).TimeIn("America/New_York")
+
+	fmt.Printf("tt: %s  err: %v\n", tt, err)
+	// tt: 2019-03-21 15:07:52 -0400 EDT  err: <nil>
+
+	fmt.Printf("tt: %s  err: %v\n", tt.Round(60*time.Minute), err)
+	// tt: 2019-03-21 15:00:00 -0400 EDT  err: <nil>
+
+}
+
+
+```

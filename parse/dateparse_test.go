@@ -275,3 +275,20 @@ func TestTimeIn(t *testing.T) {
 	}
 
 }
+
+func TestRound(t *testing.T) {
+
+	s := "Thu Mar 21 19:07:52 UTC 2019"
+	tt, err := DateTimeParse(s).TimeIn("America/New_York")
+
+	t.Logf("tt: %s  err: %v\n", tt, err)
+	t.Logf("tt: %s  err: %v\n", tt.Round(60*time.Minute), err)
+
+	expected, err := DateTimeParse("15:00:00 2019-03-21   -0400 EDT").GetTime()
+
+	if ! tt.Round(60 * time.Minute).Equal(expected) {
+		t.FailNow()
+	}
+	t.Logf("tt: %s  err: %v\n", tt.Round(60*time.Minute), expected)
+
+}
