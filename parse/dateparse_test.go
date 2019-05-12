@@ -289,6 +289,65 @@ func TestRound(t *testing.T) {
 	if ! tt.Round(60 * time.Minute).Equal(expected) {
 		t.FailNow()
 	}
-	t.Logf("tt: %s  err: %v\n", tt.Round(60*time.Minute), expected)
+	t.Logf("tt: %s  expected: %v\n", tt.Round(60*time.Minute), expected)
+
+}
+
+func TestDateTimeParse_GetTimeInLocation(t *testing.T) {
+
+	s := "16:02:23 5.12.2019"
+	tt, err := DateTimeParse(s).GetTimeInLocation("Asia/Shanghai")
+	if err != nil {
+		t.FailNow()
+	}
+	if tt.String() != "2019-05-12 16:02:23 +0800 CST" {
+		t.FailNow()
+	}
+
+	tt, err = DateTimeParse(s).GetTimeInLocation("bogus")
+	if err == nil {
+		t.Logf("tt: %s  err: %v\n", tt, err)
+		t.FailNow()
+	}
+
+	tt, err = DateTimeParse("123456789ten").GetTimeInLocation("bogus")
+	if err == nil {
+		t.Logf("tt: %s  err: %v\n", tt, err)
+		t.FailNow()
+	}
+
+	tt, err = DateTimeParse("1287621011948").GetTimeInLocation("America/New_York")
+	if err != nil {
+		t.Logf("tt: %s  err: %v\n", tt, err)
+		t.FailNow()
+	}
+	if tt.String() != "2010-10-20 20:30:11.948 -0400 EDT" {
+		t.Logf("tt: %v  err: %v\n", tt.String(), err)
+		t.FailNow()
+	}
+
+	tt, err = DateTimeParse("2006-01-02T15:04:05.999999999Z07:00").GetTimeInLocation("UTC")
+	if err == nil {
+		t.Logf("tt: %s  err: %v\n", tt, err)
+		t.FailNow()
+	}
+
+}
+
+func TestEdge(t *testing.T) {
+	s := "16:02:23 5.12.2019"
+	tt, err := DateTimeParse(s).NewYork()
+	t.Logf("tt: %s  err: %v\n", tt, err)
+
+	s2 := "Sun May 12 16:02:23  EDT 2019"
+	t2, err := DateTimeParse(s2).GetTimeInLocation("America/New_York")
+
+	t.Logf("t2: %s  err: %v\n", t2, err)
+
+	if ! t2.Equal(tt) {
+		t.FailNow()
+	}
+
+	// ParseInLocation(layout, value string, loc *Location) (Time, error)
 
 }
