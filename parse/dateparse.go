@@ -1,6 +1,7 @@
 package parse
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -127,7 +128,7 @@ var layout = []string{
 	"2006-01-02T15:04:05Z07:00",
 
 	// Leave this last
-	"2006-01-02T15:04:05.999999999Z07:00",
+	//"2006-01-02T15:04:05.999999999Z07:00",
 }
 
 // getTime --
@@ -141,7 +142,7 @@ func (s DateTimeParse) GetTime() (time.Time, error) {
 	st := strings.Join(strings.Fields(string(s)), " ")
 	//fmt.Printf("-->%s\n", st)
 
-	for _, l := range layout[:len(layout)-1] {
+	for _, l := range layout {
 		t, err := time.Parse(l, st)
 		if err == nil {
 			return t, err
@@ -149,7 +150,7 @@ func (s DateTimeParse) GetTime() (time.Time, error) {
 
 	}
 
-	return time.Parse(layout[len(layout)-1], st)
+	return time.Time{}, errors.New("Time format is not in layout.")
 
 }
 
@@ -169,7 +170,7 @@ func (s DateTimeParse) GetTimeInLocation(zone string) (time.Time, error) {
 	st := strings.Join(strings.Fields(string(s)), " ")
 	//fmt.Printf("-->%s\n", st)
 
-	for _, l := range layout[:len(layout)-1] {
+	for _, l := range layout {
 		t, err := time.ParseInLocation(l, st, loc)
 		if err == nil {
 			return t, err
@@ -177,7 +178,7 @@ func (s DateTimeParse) GetTimeInLocation(zone string) (time.Time, error) {
 
 	}
 
-	return time.ParseInLocation(layout[len(layout)-1], st, loc)
+	return time.Time{}, errors.New("Time format is not in layout.")
 
 }
 
