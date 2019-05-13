@@ -286,7 +286,7 @@ func TestRound(t *testing.T) {
 
 	expected, err := DateTimeParse("15:00:00 2019-03-21   -0400 EDT").GetTime()
 
-	if ! tt.Round(60 * time.Minute).Equal(expected) {
+	if !tt.Round(60 * time.Minute).Equal(expected) {
 		t.FailNow()
 	}
 	t.Logf("tt: %s  expected: %v\n", tt.Round(60*time.Minute), expected)
@@ -344,7 +344,7 @@ func TestEdge(t *testing.T) {
 
 	t.Logf("t2: %s  err: %v\n", t2, err)
 
-	if ! t2.Equal(tt) {
+	if !t2.Equal(tt) {
 		t.FailNow()
 	}
 
