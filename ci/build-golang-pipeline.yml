@@ -5,7 +5,7 @@ resources:
   type: git
   source:
     uri: https://github.com/mchirico/date.git
-    branch: develop
+    branch: master
 
 ###############################################################################
 
@@ -25,3 +25,12 @@ jobs:
     passed: [unit]
   - task: build
     file: date/ci/build-task.yml
+
+- name: inform
+  plan:
+  - get: date
+    trigger: true
+    passed: [build]
+  - task: build
+    file: date/ci/inform-task.yml
+

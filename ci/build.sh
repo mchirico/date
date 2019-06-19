@@ -16,7 +16,7 @@ go get -v -t ./...
 
 echo
 echo "Building..."
-#go build -v
+go build -v ./...
 
 echo
 echo "Smoke test..."
