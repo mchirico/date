@@ -162,8 +162,8 @@ var layout = []string{
 	"02 Jan 06 15:04 MST",
 	"02 Jan 06 15:04 -0700",
 	"Monday, 02-Jan-06 15:04:05 MST",
-	"Mon, 02 Jan 2006 15:04:05 MST",
-	"Mon, 02 Jan 2006 15:04:05 -0700",
+	"Mon, _2 Jan 2006 15:04:05 MST",
+	"Mon, _2 Jan 2006 15:04:05 -0700",
 	"2006-01-02T15:04:05Z07:00",
 
 	// Leave this last

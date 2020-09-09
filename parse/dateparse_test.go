@@ -274,6 +274,11 @@ func TestTimeIn(t *testing.T) {
 		t.FailNow()
 	}
 
+	tt, err = DateTimeParse("Wed, 9 Sep 2020 09:06:34 -0700").TimeIn("America/New_York")
+	if err != nil {
+		t.FailNow()
+	}
+
 }
 
 func TestRound(t *testing.T) {
