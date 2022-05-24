@@ -179,6 +179,34 @@ func TestDateTimeParse_NewYork(t *testing.T) {
 
 }
 
+func TestDateTimeParse_Special(t *testing.T) {
+	r, err := DateTimeParse("Thu Mar 21 18:54:16 2019").NewYork()
+
+	if err != nil {
+		t.FailNow()
+	}
+
+	expected := "2019-03-21 18:54:16 -0400 EDT"
+	if r.String() != expected {
+		t.Fatalf("Expected: %s, Got: %s", expected, r.String())
+	}
+
+}
+
+func TestDateTimeParse_Special2(t *testing.T) {
+	r, err := DateTimeParse("Thu   2019 Mar 21 18:54:16").NewYork()
+
+	if err != nil {
+		t.FailNow()
+	}
+
+	expected := "2019-03-21 18:54:16 -0400 EDT"
+	if r.String() != expected {
+		t.Fatalf("Expected: %s, Got: %s", expected, r.String())
+	}
+
+}
+
 func TestDateTimeParse_GetTimeLocHRminS(t *testing.T) {
 	s := "1287621011948"
 	r, err := DateTimeParse(s).GetTimeLocHRminS()
