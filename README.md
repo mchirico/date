@@ -15,6 +15,7 @@ go get -u github.com/mchirico/date/parse
 
 ### Usage
 
+[playground](https://go.dev/play/p/K0rBJrvVjRn)
 ```go
 
 package main
