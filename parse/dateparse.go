@@ -48,6 +48,8 @@ var layout = []string{
 
 	"Mon Jan _2  15:04 UTC 2006",
 	"Mon Jan _2  15:04:05 UTC 2006",
+	"Mon Jan _2  15:04:05 2006",
+	"Mon 2006 Jan _2 15:04:05",
 
 	"January 2, 2006, 3:04 pm",
 	"January 2 2006, 3:04 pm",
