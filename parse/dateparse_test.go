@@ -194,7 +194,7 @@ func TestDateTimeParse_Special(t *testing.T) {
 }
 
 func TestDateTimeParse_Special2(t *testing.T) {
-	r, err := DateTimeParse("Thu   2019 Mar 21 18:54:16").NewYork()
+	r, err := DateTimeParse("21 Mar, 2019 18:54:16").NewYork()
 
 	if err != nil {
 		t.FailNow()

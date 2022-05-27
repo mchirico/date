@@ -34,16 +34,16 @@ type DateTimeParse string
 
 var layout = []string{
 
-	"January 2, 2006, 3:04 pm",
-	"January 2, 2006, 3:04pm",
-	"January 2, 2006, 03:04 pm",
-	"January 2 2006, 03:04 pm",
+	"January 2 2006 3:04 pm",
+	"January 2 2006 3:04pm",
+	"January 2 2006 03:04 pm",
+	"January 2 2006 03:04 pm",
 	"January 2 2006 03:04 pm",
 
-	"January 2, 2006, 3:04:05 pm",
-	"January 2, 2006, 3:04:05pm",
-	"January 2, 2006, 03:04:05 pm",
-	"January 2 2006, 03:04:05 pm",
+	"January 2 2006 3:04:05 pm",
+	"January 2 2006 3:04:05pm",
+	"January 2 2006 03:04:05 pm",
+	"January 2 2006 03:04:05 pm",
 	"January 2 2006 03:04:05 pm",
 
 	"Mon Jan _2  15:04 UTC 2006",
@@ -51,21 +51,51 @@ var layout = []string{
 	"Mon Jan _2  15:04:05 2006",
 	"Mon 2006 Jan _2 15:04:05",
 
-	"January 2, 2006, 3:04 pm",
-	"January 2 2006, 3:04 pm",
-	"January 2 2006 3:04 pm",
-	"Jan 2, 2006, 03:04 pm",
-	"Jan 2 2006, 03:04 pm",
-	"Jan 2, 2006, 3:04 pm",
-	"Jan 2, 06, 3:04 pm",
+	"Mon _2 Jan 15:04 UTC 2006",
+	"Mon _2 Jan 15:04:05 UTC 2006",
+	"Mon _2 Jan 15:04:05 2006",
+	"Mon 2006 Jan _2 15:04:05",
 
-	"January 2, 2006, 3:04:05 pm",
-	"January 2 2006, 3:04:05 pm",
+	"Mon January _2  15:04 UTC 2006",
+	"Mon January _2  15:04:05 UTC 2006",
+	"Mon January _2  15:04:05 2006",
+	"Mon 2006 January _2 15:04:05",
+
+	"Mon Jan 2006 _2  15:04 UTC",
+	"Mon Jan 2006 _2  15:04:05 UTC",
+	"Mon Jan 2006 _2  15:04:05",
+	"Mon 2006 Jan _2 15:04:05",
+
+	"Jan 2006 _2  15:04 UTC",
+	"Jan 2006 _2  15:04:05 UTC",
+	"Jan 2006 _2  15:04:05",
+	"2006 Jan _2 15:04:05",
+
+	"_2 Jan 2006  15:04 UTC",
+	"_2 Jan 2006  15:04:05 UTC",
+	"_2 Jan 2006  15:04:05",
+	"_2 2006 Jan  15:04:05",
+
+	"Mon January 2006 _2  15:04 UTC",
+	"Mon January 2006 _2  15:04:05 UTC",
+	"Mon January 2006 _2  15:04:05",
+	"Mon 2006 January _2 15:04:05",
+
+	"January 2 2006 3:04 pm",
+	"January 2 2006 3:04 pm",
+	"January 2 2006 3:04 pm",
+	"Jan 2 2006 03:04 pm",
+	"Jan 2 2006 03:04 pm",
+	"Jan 2 2006 3:04 pm",
+	"Jan 2 06 3:04 pm",
+
 	"January 2 2006 3:04:05 pm",
-	"Jan 2, 2006, 03:04:05 pm",
-	"Jan 2 2006, 03:04:05 pm",
-	"Jan 2, 2006, 3:04:05 pm",
-	"Jan 2, 06, 3:04:05 pm",
+	"January 2 2006 3:04:05 pm",
+	"January 2 2006 3:04:05 pm",
+	"Jan 2 2006 03:04:05 pm",
+	"Jan 2 2006 03:04:05 pm",
+	"Jan 2 2006 3:04:05 pm",
+	"Jan 2 06 3:04:05 pm",
 
 	"Jan 2 15:04:05",
 	"2 Jan 15:04:05",
@@ -174,11 +204,11 @@ var layout = []string{
 	"02 Jan 06 15:04 -0700",
 	"Monday, 02-Jan-06 15:04:05 MST",
 	"Monday, 02-Jan-06 15:04:05 (MST)",
-	"Mon, _2 Jan 2006 15:04:05 MST",
-	"Mon, _2 Jan 2006 15:04:05 (MST)",
-	"Mon, _2 Jan 2006 15:04:05 -0700",
-	"Mon, _2 Jan 2006 15:04:05 -0700 MST",
-	"Mon, _2 Jan 2006 15:04:05 -0700 (MST)",
+	"Mon _2 Jan 2006 15:04:05 MST",
+	"Mon _2 Jan 2006 15:04:05 (MST)",
+	"Mon _2 Jan 2006 15:04:05 -0700",
+	"Mon _2 Jan 2006 15:04:05 -0700 MST",
+	"Mon _2 Jan 2006 15:04:05 -0700 (MST)",
 	"2006-01-02T15:04:05Z07:00",
 
 	// Leave this last
@@ -194,7 +224,7 @@ func (s DateTimeParse) GetTime() (time.Time, error) {
 	}
 
 	st := strings.Join(strings.Fields(string(s)), " ")
-	//fmt.Printf("-->%s\n", st)
+	st = strings.ReplaceAll(st, ",", "")
 
 	for _, l := range layout {
 		t, err := time.Parse(l, st)
