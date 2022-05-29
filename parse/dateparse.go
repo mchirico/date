@@ -32,6 +32,7 @@ func ifEpoch(s string) (time.Time, error) {
 // DateTimeParse -- variety of expected dates
 type DateTimeParse string
 
+var lastused = "2006-01-02T15:04:05+07:00"
 var layout = []string{
 
 	"January 2 2006 3:04 pm",
@@ -212,7 +213,7 @@ var layout = []string{
 	"2006-01-02T15:04:05Z07:00",
 
 	// Leave this last
-	//"2006-01-02T15:04:05.999999999Z07:00",
+	"2006-01-02T15:04:05.999999999Z07:00",
 }
 
 // getTime --
@@ -226,9 +227,14 @@ func (s DateTimeParse) GetTime() (time.Time, error) {
 	st := strings.Join(strings.Fields(string(s)), " ")
 	st = strings.ReplaceAll(st, ",", "")
 
+	if t, err := time.Parse(lastused, st); err == nil {
+		return t, err
+	}
+
 	for _, l := range layout {
 		t, err := time.Parse(l, st)
 		if err == nil {
+			lastused = l
 			return t, err
 		}
 
@@ -254,9 +260,13 @@ func (s DateTimeParse) GetTimeInLocation(zone string) (time.Time, error) {
 	st := strings.Join(strings.Fields(string(s)), " ")
 	//fmt.Printf("-->%s\n", st)
 
+	if t, err := time.ParseInLocation(lastused, st, loc); err == nil {
+		return t, err
+	}
 	for _, l := range layout {
 		t, err := time.ParseInLocation(l, st, loc)
 		if err == nil {
+			lastused = l
 			return t, err
 		}
 

@@ -93,6 +93,12 @@ func TestDateTimeParse(t *testing.T) {
 		t.Fatalf("Time gave error")
 	}
 
+	s = " Wed, 9 Sep 2020 11:34:00 -0400 (EDT)"
+	tt, err = DateTimeParse(s).GetTimeLoc()
+	if err != nil {
+		t.Fatalf("Time gave error")
+	}
+
 	t3, _ := DateTimeParse(s).GetTimeLocSquish()
 	fmt.Printf("Time: %v \n",
 		t3)
