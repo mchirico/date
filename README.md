@@ -67,6 +67,7 @@ func main() {
 
 Works with timezones 
 
+[playground](https://go.dev/play/p/6uPD1gedJNh)
 ```go
 package main
 
