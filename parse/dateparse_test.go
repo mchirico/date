@@ -93,7 +93,25 @@ func TestDateTimeParse(t *testing.T) {
 		t.Fatalf("Time gave error")
 	}
 
-	s = " Wed, 9 Sep 2020 11:34:00 -0400 (EDT)"
+	s = "Sep 2022  8  13:24:18"
+	tt, err = DateTimeParse(s).GetTimeLoc()
+	if err != nil {
+		t.Fatalf("Time gave error")
+	}
+
+	s = "January 2022  8  13:24:18"
+	tt, err = DateTimeParse(s).GetTimeLoc()
+	if err != nil {
+		t.Fatalf("Time gave error")
+	}
+
+	s = "2022  8  Jan 13:24:18"
+	tt, err = DateTimeParse(s).GetTimeLoc()
+	if err != nil {
+		t.Fatalf("Time gave error")
+	}
+
+	s = "2022 January 8  13:24:18"
 	tt, err = DateTimeParse(s).GetTimeLoc()
 	if err != nil {
 		t.Fatalf("Time gave error")
