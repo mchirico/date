@@ -6,6 +6,18 @@ import (
 	"time"
 )
 
+func TestDuplicates(t *testing.T) {
+	m := map[string]int{}
+	for _, s := range layout {
+		m[s] += 1
+	}
+	for k, v := range m {
+		if v > 1 {
+			t.Fatalf("Duplicate: %s\n", k)
+		}
+	}
+}
+
 func TestLoctoUTC(t *testing.T) {
 	s := "Sep  8  13:24:18 "
 	tt, err := DateTimeParse(s).NewYork()
