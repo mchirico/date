@@ -38,23 +38,10 @@ var layout = []string{
 	"January 2 2006 3:04 pm",
 	"January 2 2006 3:04pm",
 	"January 2 2006 03:04 pm",
-	"January 2 2006 03:04 pm",
-	"January 2 2006 03:04 pm",
-
-	"January 2 2006 3:04:05 pm",
-	"January 2 2006 3:04:05pm",
-	"January 2 2006 03:04:05 pm",
-	"January 2 2006 03:04:05 pm",
-	"January 2 2006 03:04:05 pm",
 
 	"Mon Jan _2  15:04 UTC 2006",
 	"Mon Jan _2  15:04:05 UTC 2006",
 	"Mon Jan _2  15:04:05 2006",
-	"Mon 2006 Jan _2 15:04:05",
-
-	"Mon _2 Jan 15:04 UTC 2006",
-	"Mon _2 Jan 15:04:05 UTC 2006",
-	"Mon _2 Jan 15:04:05 2006",
 	"Mon 2006 Jan _2 15:04:05",
 
 	"Mon January _2  15:04 UTC 2006",
@@ -65,7 +52,6 @@ var layout = []string{
 	"Mon Jan 2006 _2  15:04 UTC",
 	"Mon Jan 2006 _2  15:04:05 UTC",
 	"Mon Jan 2006 _2  15:04:05",
-	"Mon 2006 Jan _2 15:04:05",
 
 	"Jan 2006 _2  15:04 UTC",
 	"Jan 2006 _2  15:04:05 UTC",
@@ -80,27 +66,17 @@ var layout = []string{
 	"Mon January 2006 _2  15:04 UTC",
 	"Mon January 2006 _2  15:04:05 UTC",
 	"Mon January 2006 _2  15:04:05",
-	"Mon 2006 January _2 15:04:05",
 
-	"January 2 2006 3:04 pm",
-	"January 2 2006 3:04 pm",
-	"January 2 2006 3:04 pm",
-	"Jan 2 2006 03:04 pm",
 	"Jan 2 2006 03:04 pm",
 	"Jan 2 2006 3:04 pm",
 	"Jan 2 06 3:04 pm",
 
 	"January 2 2006 3:04:05 pm",
-	"January 2 2006 3:04:05 pm",
-	"January 2 2006 3:04:05 pm",
-	"Jan 2 2006 03:04:05 pm",
 	"Jan 2 2006 03:04:05 pm",
 	"Jan 2 2006 3:04:05 pm",
 	"Jan 2 06 3:04:05 pm",
 
 	"Jan _2 03:04:05 pm 2006",
-	"Jan _2 03:04:05 pm 2006",
-	"Jan _2 3:04:05 pm 2006",
 	"Jan _2 3:04:05 pm 2006",
 
 	"January _2 03:04:05 pm 2006",
